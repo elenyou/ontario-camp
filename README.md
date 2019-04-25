@@ -1,3 +1,3 @@
-###YelpCampound Ontario
+###Campground Ontario
 
 Express.js, ejs, MongoDB, Mongoose, Bootstrap 4.

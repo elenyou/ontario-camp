@@ -27,8 +27,11 @@
         <div class='col-md-3 col-sm-6'>
             <figure class="figure">
                 <img src="<%= campground.image %>" class="figure-img img-fluid rounded" alt="<%= campground.name %>">
-                <figcaption class="figure-caption text-right">
+                <figcaption class="figure-caption text-center">
                     <h4><%= campground.name %></h4>
+                    <p>
+                        <a href="/campgrounds/<%= campground._id %>" class="btn bg-success text-white btn-sm">More Info</a>
+                    </p>
                 </figcaption>
             </figure>
         </div>

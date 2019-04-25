@@ -1,55 +1,43 @@
-const express = require('express'),
-    app = express(),
-    bodyParser = require('body-parser'),
-    mongoose = require('mongoose');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const Campground = require('./models/campground');
+const seedDB = require('./seeds');
 
-app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+
+seedDB();
 mongoose.connect('mongodb+srv://elen:070331mdb!@cluster0-drqh7.mongodb.net/test?retryWrites=true', { useNewUrlParser: true });
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set("view engine", "ejs");
+app.use(express.static('public'));
 
-//SCHEMA SETUP
-const campgroundSchema = new mongoose.Schema({
-    name: String,
-    image: String
-});
 
-const Campground = mongoose.model('Campground', campgroundSchema);
-
-// Campground.create(
-//     {
-//         name: "Pinery Provincial Park1",
-//         image: "/images/pinary-park.jpg"
-//     }
-// ).then(() => console.log('New Campground created'));
-
-// const campgrounds = [
-//     { name: "Pinery Provincial Park", image: "/images/pinary-park.jpg" },
-//     { name: "Ponderosa Campground", image: "/images/ponderosa-campground.jpg" },
-//     { name: "Prospect Hill", image: "/images/prospect-hill.jpg" }
-// ]
 
 app.get('/', function (req, res) {
     res.render('landing');
 });
 
+//Display a list of all campgrounds (Index Route)
 app.get('/campgrounds', function (req, res) {
     //get all campgrounds from DB
     Campground.find({}, function (err, allcampgrounds) {
         if (err) {
             console.log(err);
         } else {
-            res.render('campgrounds', { campgrounds: allcampgrounds });
+            res.render('index', { campgrounds: allcampgrounds });
         }
     });
 });
 
+//Add new camp to DB (Create Route)
 app.post('/campgrounds', function (req, res) {
-    //get data from form and add to campgrounds array
+    //Get data from form and add to campgrounds array
     const name = req.body.name;
     const image = req.body.image;
-    const newCampground = { name: name, image: image };
+    const description = req.body.description;
+    const newCampground = { name: name, image: image, description: description };
     //Create a new campground and save DB
     Campground.create(newCampground, function (err, newlyCreated) {
         if (err) {
@@ -61,9 +49,23 @@ app.post('/campgrounds', function (req, res) {
     });
 });
 
+//Displays form to make a new camp (New Route)
 app.get('/campgrounds/new', function (req, res) {
-    res.render('new.ejs');
+    res.render('new');
 });
+
+// Shows info about one camp (Show Route)
+app.get("/campgrounds/:id", function (req, res) {
+    //find the campground with provided ID
+    Campground.findById(req.params.id).populate("comments").exec(function (err, foundCampground) {
+        if (err) {
+            console.log(err);
+        } else {
+            //render show template with that campground
+            res.render('show', { campground: foundCampground });
+        }
+    });
+})
 
 app.listen(3000, function () {
     console.log('Ready!');
