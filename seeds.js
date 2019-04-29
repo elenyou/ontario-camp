@@ -54,7 +54,7 @@ function seedDB() {
                             }); // create Comment
                     }
                 }); // create Campground
-            }); // data.forEach
+            });
         }// not err
     });//remove
 }

@@ -14,6 +14,15 @@
                     </div>
                     <p class="card-text"><%= campground.description %></p>
                 </div>
+                <div class="card-footer text-muted d-flex justify-content-between">
+                    <em>Submitted by: <%= campground.author.username %></em>
+                    <div class="d-flex align-items-center">
+                        <a href="/campgrounds/<%= campground._id %>/edit" class="btn color-green text-white btn-sm mr-1">Edit</a>
+                        <form id='delete-form' action='/campgrounds/<%= campground._id %>?_method=DELETE' method='POST'>
+                            <button class='btn bg-danger text-white btn-sm'>Delete</button>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="d-flex justify-content-between mb-3">
                 <h5 class="card-title">Comments</h5>
@@ -25,7 +34,7 @@
                     <% campground.comments.forEach(function(comment){ %>
                     <li class="list-group-item color-blue">
                         <div class="d-flex justify-content-between">
-                            <strong>&#9733;&#9733;&#9733;&#9733;&#9733;&nbsp;<span class="text-white"><%= comment.author %></span></strong>
+                            <strong>&#9733;&#9733;&#9733;&#9733;&#9733;&nbsp;<span class="text-white"><%= comment.author.username %></span></strong>
                             <p class="color-coral">14 April, 2019</p>
                         </div>
                         <p><%= comment.text %></p>
