@@ -1,0 +1,46 @@
+<% include ../partials/header %>
+
+<div class="container text-center mt-3">
+    <div class="hero d-flex justify-content-center d-flex align-items-center mb-2">
+        <img class="img-fluid hero-img" src="/images/9.jpg" alt="image">
+        <div class="container hero-text mb-3 mt-3 font  color-coral">
+            <h1>Wellcome To Ontario Campgrounds</h1>
+            <div class="d-flex justify-content-center align-items-center flex-wrap mt-3">
+                <img src="/images/icon1.png" alt="icon">
+                <img src="/images/icon2.png" alt="icon">
+                <img src="/images/icon3.png" alt="icon">
+                <img src="/images/icon4.png" alt="icon">
+                <img src="/images/icon5.png" alt="icon">
+                <img src="/images/icon6.png" alt="icon">
+                <img src="/images/icon7.png" alt="icon">
+                <img src="/images/icon8.png" alt="icon">
+                <img src="/images/icon9.png" alt="icon">
+            </div>
+        </div>
+    </div>
+    <a href="/campgrounds/new" class="btn bg-warning text-white btn-large mt-3">Add New Campground</a>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="p-2 font text-center">Most popular campgrounds in Ontario</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <% campgrounds.map(campground => {%>
+        <div class='col-md-3 col-sm-6'>
+            <div class="card mb-2 hero-card">
+                <img class="card-img-top" src="<%= campground.image %>" alt="<%= campground.name %>">
+                <div class="card-body text-center color-blue d-flex flex-column justify-content-end">
+                    <h5 class="card-title"><%= campground.name %></h5>
+                    <a href="/campgrounds/<%= campground._id %>" class="btn bg-warning text-white btn-sm">More Info</a>
+                </div>
+            </div>
+        </div>
+        <%}); %>
+    </div>
+</div>
+
+
+<% include ../partials/footer %>

@@ -1,0 +1,108 @@
+/* COLORS and FONT */
+.color-yellow {
+    background-color: rgba(255, 191, 0, 0.6);
+}
+
+.color-blue {
+    background-color:  rgba(73, 190, 183, 0.6);
+}
+
+.color-coral {
+    color: #ff5959;
+}
+
+.text-blue-color {
+    color:  #49beb7;
+}
+
+@font-face {
+    font-family: font;
+    src: url("/font/font.woff2");
+}
+
+.font {
+    font-family: font;
+}
+
+.bg-success {
+    background-color: #49beb7!important;
+}
+
+.active {
+ background-color: #49beb7!important;
+}
+
+.btn {
+    font-weight: 700;
+    color: #085f63;
+}
+
+
+/* PAGES */
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #085f63;
+}
+h5 {
+    font-weight: 700;
+}
+.hero {
+    flex-direction: column;
+}
+
+.hero-text img {
+    width: 50px;
+}
+
+@media screen and (min-width: 768px) {
+    .hero {
+        flex-direction: row;
+    }
+    .hero-img {
+        width: 30%;
+    }
+    .hero-card {
+        height: 210px;
+    }
+    .hero-card img {
+        height: 100px;
+    }
+    .form-control {
+        width: 500px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .hero-card {
+        height: 260px;
+    }
+    .hero-card img {
+        height: 150px;
+    }
+    .form-control {
+        width: 500px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .hero-text h1 {
+        font-size: 70px;
+    }
+    .hero-text img {
+        width: 70px;
+    }
+    .hero-card {
+        height: 270px;
+    }
+    .hero-card img {
+        height: 160px;
+    }
+    .form-control {
+        width: 500px;
+    }
+    h3 {
+        font-size: 50px;
+        margin-top: 30px;
+    }
+}

@@ -1,0 +1,50 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card mb-5 mt-3">
+                <img class="card-img-top" src="<%= campground.image %>" alt="<%= campground.name %>">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap justify-content-between">
+                        <h3 class="card-title">
+                            <a href="" class="font text-blue-color"><%= campground.name %></a>
+                        </h3>
+                        <h5 class="text-right color-coral">9$/night</h5>
+                    </div>
+                    <p class="card-text"><%= campground.description %></p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <h5 class="card-title">Comments</h5>
+                <a href="/campgrounds/<%= campground._id %>/comments/new" class="btn bg-warning text-white btn-sm">Add
+                    new comment</a>
+            </div>
+            <div class="card">
+                <ul class="list-group">
+                    <% campground.comments.forEach(function(comment){ %>
+                    <li class="list-group-item color-blue">
+                        <div class="d-flex justify-content-between">
+                            <strong>&#9733;&#9733;&#9733;&#9733;&#9733;&nbsp;<span class="text-white"><%= comment.author %></span></strong>
+                            <p class="color-coral">14 April, 2019</p>
+                        </div>
+                        <p><%= comment.text %></p>
+                    </li>
+                    <% }); %>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-3 mt-5">
+            <h3 class="font color-coral">
+                Ontario campground
+            </h3>
+            <ul class="list-group">
+                <a href="" class="list-group-item color-yellow list-group-item-action active">Info 1</a>
+                <a href="" class="list-group-item color-yellow list-group-item-action">Info 2</a>
+                <a href="" class="list-group-item color-yellow list-group-item-action">Info 3</a>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>
