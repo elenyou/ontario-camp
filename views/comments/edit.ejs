@@ -2,13 +2,13 @@
 
 <div class="container mt-5">
     <div class="d-flex flex-column align-items-center">
-        <h1 class='text-center pb-3'>Create a new Comment to "<%= campground.name %>"</h1>
-        <form action="/campgrounds/<%= campground._id %>/comments" method="POST">
+        <h1 class='text-center pb-3'>Edit Comment</h1>
+        <form action="/campgrounds/<%= campground_id %>/comments/<%= comment._id %>?_method=PUT" method="POST">
             <div class="form-group">
-                <input class="form-control" type="text" name="comment[text]" placeholder="text">
+                <input class="form-control" type="text" name="comment[text]" value='<%= comment.text %>'>
             </div>
             <div class="form-group">
-                <button class="btn bg-warning  text-white btn-large btn-block">Submit!</button>
+                <button class="btn bg-warning text-white btn-large btn-block">Submit!</button>
             </div>
         </form>
         <a href="/campgrounds" class="btn btn-link text-success">GO BACK</a>
