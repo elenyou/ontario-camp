@@ -55,7 +55,7 @@ router.get('/:comment_id/edit', middleware.checkCommentOwnership, async(req, res
 //COMMENTS Update Route
 router.put('/:comment_id', async(req, res) => {
     try {
-        const result = await  Comment.findOneAndUpdate(req.params.comment_id, req.body.comment);
+        const result = await  Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment);
         res.redirect('/campgrounds/' + req.params.id);
     } catch(err) {
         res.redirect('back');
@@ -66,7 +66,7 @@ router.put('/:comment_id', async(req, res) => {
 //COMMENTS Destroy Route
 router.delete('/:comment_id', middleware.checkCommentOwnership, async(req, res) => {
     try {
-        const result = await  Comment.findOneAndDelete(req.params.comment_id);
+        const result = await  Comment.findByIdAndDelete(req.params.comment_id);
         req.flash('success', 'Successfully deleted comment.');
         res.redirect('/campgrounds/' + req.params.id);
     } catch(err) {
