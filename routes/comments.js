@@ -10,16 +10,16 @@ const middleware      = require('../middleware');
 //Comments Routes
 //==============
 
+const asyncMiddleware = fn => (req, res, next) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+};
+
 //Comment new
-router.get("/new", middleware.isLoggedIn, async (req, res) => {
+router.get("/new", middleware.isLoggedIn, asyncMiddleware(async (req, res,next) => {
     //find the campground with provided ID
-    try {
-        const campground = await Campground.findById(req.params.id);
-        res.render('comments/new', { campground: campground });
-    } catch(err) {
-        console.log(err);
-    }
-});
+    const campground = await Campground.findById(req.params.id);
+    res.render('comments/new', { campground: campground });
+}));
 
 //Comments create
 router.post("/",  middleware.isLoggedIn, async (req, res) => {

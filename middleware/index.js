@@ -55,4 +55,5 @@ middlewareObj.isLoggedIn = (req, res, next) => {
   res.redirect("/login");
 };
 
+
 module.exports = middlewareObj;

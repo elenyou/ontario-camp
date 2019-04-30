@@ -19,12 +19,13 @@ const commentRoutes      = require("./routes/comments"),
 
 // seedDB();
 mongoose.connect('mongodb+srv://elen:070331mdb!@cluster0-drqh7.mongodb.net/test?retryWrites=true', { useNewUrlParser: true });
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride("_method"));
 app.use(flash());
+mongoose.set('useFindAndModify', false);
+
 
 //Passport config
 app.use(session({
