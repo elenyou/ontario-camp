@@ -6,17 +6,19 @@ const flash          = require("connect-flash");
 const passport       = require('passport');
 const session        = require("express-session");
 const LocalStrategy  = require('passport-local');
+const moment         = require("moment");
 const methodOverride = require('method-override');
 const Campground     = require('./models/campground');
 const Comment        = require('./models/comment');
 const User           = require('./models/user');
-const seedDB         = require('./seeds');
+
 
 //requiring routes
 const commentRoutes      = require("./routes/comments"),
       campgroundRoutes   = require("./routes/campgrounds"),
       indexRoutes        = require("./routes/index")
 
+// const seedDB         = require('./seeds');
 // seedDB();
 mongoose.connect('mongodb+srv://elen:070331mdb!@cluster0-drqh7.mongodb.net/test?retryWrites=true', { useNewUrlParser: true });
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,6 +26,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride("_method"));
 app.use(flash());
+app.locals.moment = moment; // create local variable available for the application
 mongoose.set('useFindAndModify', false);
 
 

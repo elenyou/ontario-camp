@@ -40,7 +40,7 @@
                     <div class="d-flex flex-wrap justify-content-between">
                         <strong><span
                                 class="text-white"><%= comment.author.username %></span></strong>
-                        <p class="color-coral">14 April, 2019</p>
+                        <p class="color-coral"><%= moment(comment.createdAt).fromNow() %></p>
                     </div>
 
                     <p><%= comment.text %></p>
