@@ -2,6 +2,7 @@ const express        = require('express');
 const app            = express();
 const bodyParser     = require('body-parser');
 const mongoose       = require('mongoose');
+const cookieParser = require("cookie-parser");
 const flash          = require("connect-flash");
 const passport       = require('passport');
 const session        = require("express-session");
@@ -28,6 +29,7 @@ app.use(methodOverride("_method"));
 app.use(flash());
 app.locals.moment = moment; // create local variable available for the application
 mongoose.set('useFindAndModify', false);
+app.use(cookieParser('secret'));
 
 
 //Passport config

@@ -5,7 +5,6 @@ const Campground = require("../models/campground");
 const Comment = require("../models/comment");
 const middleware      = require('../middleware');
 
-
 //==============
 //Comments Routes
 //==============
