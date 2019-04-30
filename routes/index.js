@@ -6,34 +6,36 @@ const User      = require('../models/user');
 //===========
 //AUTH ROUTES
 //===========
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
     res.render('landing');
 });
 
+
 //show register form
-router.get("/register", function (req, res) {
+router.get("/register", (req, res) => {
     res.render('register');
 });
 
 //handle sign up logic
-router.post("/register", function (req, res) {
+router.post("/register", async (req, res)  =>  {
     let newUser = new User({username: req.body.username});
-    User.register(newUser, req.body.password, function (err, user) {
-        if (err) {
-            req.flash('error', err.message);
-            return res.render("register");
-        }
-        passport.authenticate("local")(req, res, function () {
+    try {
+         const user = await User.register(newUser, req.body.password);
+         passport.authenticate("local")(req, res, () => {
             req.flash('success', "Wellcome!" + user.username);
             res.redirect('/campgrounds');
         });
-    });
+     } catch(err) {
+        req.flash('error', err.message);
+        return res.render("register");
+     }
 });
 
 //show login form
-router.get("/login", function (req, res) {
+router.get("/login",  (req, res)  =>  {
     res.render('login');
 });
+
 //handle login logic
 router.post("/login", passport.authenticate('local',
     {
@@ -43,7 +45,7 @@ router.post("/login", passport.authenticate('local',
 });
 
 //add log out logic
-router.get("/logout", function (req, res) {
+router.get("/logout", (req, res)  =>  {
     req.logout();
     req.flash('success', 'You have been logged out.');
     res.redirect('/campgrounds');
